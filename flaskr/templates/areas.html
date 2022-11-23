@@ -1,0 +1,217 @@
+{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    {% block cabeçario%}
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Areas</title>
+    <!-- Bootstrap -->
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.css" rel="stylesheet"/>
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='Album_Bootstrap/bootstrap.min.css')}}" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <!-- Favicons -->
+    <meta name="theme-color" content="#7952b3">
+
+    <style>
+      text {
+        font-family:'Arial';
+        font-weight: bold;
+        color: white
+      }
+      h1 {
+        font-family:'Arial';
+        font-weight: bold;
+        font-size:28;
+      }
+      #introducao {
+        text-align: justify;
+        text-justify: inter-word;
+      }
+      p {
+        font-family:'Arial';
+        font-size: 13px;
+      }
+      button {
+        background: transparent;
+        border: none !important;
+        font-size:0;
+      }
+    </style> 
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+  </head>
+
+  <body>
+    {% block corpo %} 
+    <main>
+
+      <h1 class="mt-4 d-flex justify-content-center">ÁREAS DE ATUAÇÃO</h1>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+
+        <button id="Construcao" type="button" onclick="Cons1(co1,co2, for1); Cons2(con1,con2,con3,con4,con5,con6); Cons3(cons1, cons2)">
+          <div class="col">
+            <div class="card shadow-sm">
+                <div class="bg-image hover-overlay">
+                  <img src="{{ url_for('static', filename='images/ConstruçãoImg.png')}}" class="w-100" height=400 width="100%" />
+                  <div class="mask" style="background-color: rgba(80, 79, 79, 0.7)">
+                    <div class="d-flex justify-content-center align-items-center h-100">
+                      <text x="50%" y="50%" fill="#eceeef" dy=".3em">CONSTRUÇÃO</text>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </button>
+
+      <button id="Transformacao" type="button" onclick="Tra1(tr1,tr2, for3); Tra2(tra1,tra2,tra3,tra4,tra5,tra6); Tra3(trnf1, trnf2)">
+        <div class="col">
+          <div class="card shadow-sm">
+              <div class="bg-image hover-overlay">
+                <img src="{{ url_for('static', filename='images/TransformaçãoImg.png')}}" class="w-100" height=400 width="100%" />
+                <div class="mask" style="background-color: rgba(80, 79, 79, 0.7)">
+                  <div class="d-flex justify-content-center align-items-center h-100">
+                    <text x="50%" y="50%" fill="#eceeef" dy=".3em">TRANSFORMAÇÃO</text>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </button>
+
+      <button id="Saude" type="button" onclick="Sau1(sa1,sa2, for2); Sau2(sau1,sau2,sau3,sau4,sau5,sau6); Sau3(saud1, saud2)">
+        <div class="col">
+          <div class="card shadow-sm">
+              <div class="bg-image hover-overlay">
+                <img src="{{ url_for('static', filename='images/SaúdeImg.png')}}" class="w-100" height=400 width="100%" />
+                <div class="mask" style="background-color: rgba(80, 79, 79, 0.7)">
+                  <div class="d-flex justify-content-center align-items-center h-100">
+                    <text x="50%" y="50%" fill="#eceeef" dy=".3em">SAÚDE</text>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </button>
+
+      </div>
+    </div>
+  </div>
+
+    <div class="container" id="introducao">
+      <div class="row-cols">
+        <div class="col">
+          <p id="l1" class="text-muted d-flex justify-content-center"></p>
+          <p id="l2" class="text-muted"></p>
+          <p id="l3" class="text-muted"></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="album py-5 bg-light">
+      <div class="container">
+        <div class="row row-cols-1 row-cols-md-3 g-3">
+          <div class="col">
+            <div class="card shadow-sm">
+                <div class="bg-image">
+                  <canvas class="canvas1" id="construção1"></canvas>
+                </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card shadow-sm">
+                <div class="bg-image">
+                  <canvas class="canvas2" id="construção2" width="400" height="400"></canvas>
+                </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="card shadow-sm">
+                <div class="bg-image">
+                  <canvas class="canvas3" id="construção3" ></canvas>
+                </div>
+            </div>
+          </div>
+
+      <script type="text/javascript" src="{{url_for('static', filename='script.js')}}"></script>
+      <script type="text/javascript">
+          const splitLines = str => str.split(/\r?\n/);
+          let formular = []
+          var id_Form_js = '{{ id_Form|tojson }}'
+          var fo1 = '{{ f1|tojson }}'
+          var fo2 = '{{ f2|tojson }}'
+          var fo3 = '{{ f3|tojson }}'
+          let for1, for2, for3 = []
+          for1 = splitLines(fo1)
+          for2 = splitLines(fo2)
+          for3 = splitLines(fo3)
+          for(var n=0;n<=id_Form_js;n++){
+            formular [n] = []
+            formular[0] =  document.getElementById('l1').innerHTML
+            formular[1] =  document.getElementById('l2').innerHTML
+            formular[2] =  document.getElementById('l3').innerHTML
+          }
+          console.log(formular)
+          let saude, construçao, transformaçao = [2]
+          saude = JSON.parse('{{tab_sau|tojson}}')
+          construçao = JSON.parse('{{tab_cons|tojson}}')
+          transformaçao = JSON.parse('{{tab_tra|tojson}}')
+          areas_vinculos = JSON.parse('{{a_v|tojson}}')
+          co1 = construçao[2][2]
+          co2 = construçao[2][4]
+
+          con1=construçao[0][2]
+          con2=construçao[1][2]
+          con3=construçao[2][2]
+          con4=construçao[0][4]
+          con5=construçao[1][4]
+          con6=construçao[2][4]
+
+          sa1=saude[2][2]
+          sa2=saude[2][4]
+
+          sau1=saude[0][2]
+          sau2=saude[1][2]
+          sau3=saude[2][2]
+          sau4=saude[0][4]
+          sau5=saude[1][4]
+          sau6=saude[2][4]
+
+          tr1 = transformaçao[2][2]
+          tr2 = transformaçao[2][4]
+
+          tra1=transformaçao[0][2]
+          tra2=transformaçao[1][2]
+          tra3=transformaçao[2][2]
+          tra4=transformaçao[0][4]
+          tra5=transformaçao[1][4]
+          tra6=transformaçao[2][4]
+
+          cons1 = areas_vinculos[0][1]
+          cons2 = areas_vinculos[0][4]
+
+          saud1 = areas_vinculos[0][2]
+          saud2 = areas_vinculos[0][4]
+
+          trnf1 = areas_vinculos[0][3]
+          trnf2 = areas_vinculos[0][4]
+
+         
+      </script>
+</main>
+    <!-- Bootstrap -->
+    <script src="{{ url_for('static', filename='/Album_Bootstrap/bootstrap.bundle.min.js')}}" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.js"></script>
+    {% endblock %}
+  </body>
+  </html>
